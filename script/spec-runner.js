@@ -67,7 +67,11 @@ function getSpecHash () {
       if (!fs.existsSync(specNodeModulesPath)) {
         return resolve('invalid')
       }
-      hashElement(specNodeModulesPath).then((result) => resolve(result.hash)).catch(reject)
+      hashElement(specNodeModulesPath, {
+        folders: {
+          exclude: ['.bin']
+        }
+      }).then((result) => resolve(result.hash)).catch(reject)
     })
   ])
 }
